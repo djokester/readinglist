@@ -65,7 +65,7 @@
         $.getJSON("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@samriddhisinha/has-recommended", function(data){
         $.each(data.items, function (i) {
             console.log($(data.items[i].description).find('.medium-feed-snippet').text())
-            $('#results').append("<div class='row' id = 'Hello'><a href='" + data.items[i].link + "' target='_blank'><div class='col-sm-3'><img src="+ data.items[i].thumbnail +" style = 'height:15em; width:25em; object-position: 50% 50%;   object-fit: cover; float:right'></div><div class='col-sm-9'><p style='color: #ffffffde; font-size: 200%;'><b>" + data.items[i].title + "</b></p><p style='color: #ffffff99;  font-size: 150%;'>" + data.items[i].author + "</p></div></a></div>");
+            $('#results').append("<a href='" + data.items[i].link + "' target='_blank'><div class='row' id = 'Hello'><div class='col-sm-3'><img src="+ data.items[i].thumbnail +" style = 'height:15vw; width:20vw; object-fit: cover;'></div><div class='col-sm-9'><p style='color: #ffffffde; font-size: 200%;'><b>" + data.items[i].title + "</b></p><p style='color: #ffffff99;  font-size: 150%;'>" + data.items[i].author + "</p></div></div></a>");
                 });
       });
     }
