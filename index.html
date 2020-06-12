@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<title>ReadingList</title>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Palanquin+Dark&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Pacifico" rel="stylesheet">
+  <link rel="icon" type="image/png" href="sam.png">
+  <style>
+  .form-group{
+    margin-top: 1%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+  #Hello{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top:1%;
+    padding: 1%;
+    border-radius: 10px 30px 10px 30px;
+    filter: drop-shadow(-10px 15px 5px #101010);
+  }
+
+#Hello:nth-child(odd) {
+    background: #222222;
+    color: black;
+}
+
+#Hello:nth-child(even) {
+    background: #202020;
+    color: #ffffff99;
+}
+
+.center-cropped {
+  width: 100%;
+  height: 10em;
+}
+  </style>
+</head>
+
+<body onload="SearchCall();" style = "background-color: #121212;">
+  <div class= "text-left" style="color: #d9d9d9; padding; 1%; margin-left: 5%; margin-right: 5%; margin-top:1%;">
+    <h1 style = "font-family: 'Palanquin Dark', sans-serif; font-size: 4em;
+">Reading<span style="font-family: 'Gaegu', cursive; 
+">List</span></h1>
+  </div>
+  <div id = "results">
+
+  </div>
+  <script>
+    function SearchCall()
+    {
+      $('#results').empty();
+      searchTerm = "Log";
+      console.log(searchTerm);
+      searchTerm =searchTerm.split(' ').join('_');
+      console.log(searchTerm);
+      apiCall(searchTerm);
+    }
+    
+    function apiCall(searchTerm){
+        $.getJSON("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@samriddhisinha/has-recommended", function(data){
+        $.each(data.items, function (i) {
+            console.log($(data.items[i].description).find('.medium-feed-snippet').text())
+            $('#results').append("<div class='row' id = 'Hello'><a href='" + data.items[i].link + "' target='_blank'><div class='col-md-9'><h2 style='color: #ffffffde;'><b>" + data.items[i].title + "</b></h2><h3 style='color: #ffffff99;'>" + data.items[i].author + "</h3></div><div class='col-md-3'><img src="+ data.items[i].thumbnail +" style = 'height:15em; width:25em; object-position: 50% 50%;   object-fit: cover; float:right'></div></a></div>");
+                });
+      });
+    }
+
+    function paragraphExtractor(htmlDoc){
+      extract = $(data.items[i].description).find('.medium-feed-snippet').text()
+      extract = $(htmlDoc).find('.medium-feed-snippet').text()
+      console.log(extract)
+      return extract
+    }
+  </script>
+</body>
+ 
+</html>
