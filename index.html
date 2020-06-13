@@ -10,6 +10,22 @@
   <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Pacifico" rel="stylesheet">
   <link rel="icon" type="image/png" href="sam.png">
   <style>
+
+  @-webkit-keyframes fadeIn {
+            0% {opacity: 0; transform: translateY(-20px);}
+            100% {opacity: 1; transform: translateY(0);}
+         }
+         
+  @keyframes fadeIn {
+            0% {opacity: 0; transform: translateY(-20px);}
+            100% {opacity: 1; transform: translateY(0);}
+         }
+         
+  .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+         }
+
   .form-group{
     margin-top: 1%;
     margin-left: 2.5%;
@@ -22,6 +38,10 @@
     padding: 1%;
     border-radius: 10px 30px 10px 30px;
     filter: drop-shadow(-10px 15px 5px #010101);
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
 
 #Hello:nth-child(odd) {
@@ -64,8 +84,8 @@
     function apiCall(searchTerm){
         $.getJSON("https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@samriddhisinha/has-recommended", function(data){
         $.each(data.items, function (i) {
-            console.log($(data.items[i].description).find('.medium-feed-snippet').text())
-            $('#results').append("<a href='" + data.items[i].link + "' target='_blank'><div class='row' id = 'Hello'><div class='col-sm-3'><img src="+ data.items[i].thumbnail +" style = 'height:15vw; width:20vw; object-fit: cover;'></div><div class='col-sm-9'><p style='color: #ffffffde; font-size: 200%;'><b>" + data.items[i].title + "</b></p><p style='color: #ffffff99;  font-size: 150%;'>" + data.items[i].author + "</p></div></div></a>");
+            
+            $('#results').append("<a href='" + data.items[i].link + "' target='_blank'><div class='row fadeIn' id = 'Hello'><div class='col-sm-3'><img src="+ data.items[i].thumbnail +" style = 'height:15vw; width:20vw; object-fit: cover;'></div><div class='col-sm-9'><p style='color: #ffffffde; font-size: 3vmin;'><b>" + data.items[i].title + "</b></p><p style='color: #ffffff99;  font-size: 2vmin'>" + data.items[i].author + "</p></div></div></a>");
                 });
       });
     }
